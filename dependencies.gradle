@@ -14,9 +14,6 @@ ext {
 
     //Libraries
     kotlinVersion = '1.1.4-3'
-    butterKnifeVersion = '7.0.1'
-    recyclerViewVersion = '21.0.3'
-    rxJavaVersion = '2.0.2'
     rxKotlinVersion = '2.1.0'
     rxAndroidVersion = '2.0.1'
     javaxAnnotationVersion = '1.0'
@@ -36,15 +33,12 @@ ext {
     robolectricVersion = '3.4.2'
     jUnitVersion = '4.12'
     assertJVersion = '3.8.0'
-    mockitoVersion = '1.9.5'
     dexmakerVersion = '1.0'
     espressoVersion = '3.0.0'
-    testingSupportLibVersion = '0.1'
     mockitoKotlinVersion = '1.5.0'
     mockitoAndroidVersion = '2.8.47'
     androidSupportRunnerVersion = '1.0.0'
     androidSupportRulesVersion = '1.0.0'
-    dexmakerMockitoversion = '2.2.0'
     runnerVersion = '0.5'
 
     domainDependencies = [
