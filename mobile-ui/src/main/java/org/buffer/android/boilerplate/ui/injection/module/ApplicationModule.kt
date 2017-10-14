@@ -44,7 +44,6 @@ open class ApplicationModule {
         return PreferencesHelper(context)
     }
 
-
     @Provides
     @PerApplication
     internal fun provideBufferooRepository(factory: BufferooDataStoreFactory,
