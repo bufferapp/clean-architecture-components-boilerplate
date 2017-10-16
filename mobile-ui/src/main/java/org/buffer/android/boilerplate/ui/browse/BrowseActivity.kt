@@ -8,10 +8,9 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_browse.*
+import org.buffer.android.boilerplate.presentation.ViewModelFactory
 import org.buffer.android.boilerplate.presentation.browse.BrowseBufferoosViewModel
-import org.buffer.android.boilerplate.presentation.browse.BrowseBufferoosViewModelFactory
 import org.buffer.android.boilerplate.presentation.data.ResourceState
-import org.buffer.android.boilerplate.presentation.data.Resource
 import org.buffer.android.boilerplate.presentation.model.BufferooView
 import org.buffer.android.boilerplate.ui.R
 import org.buffer.android.boilerplate.ui.mapper.BufferooMapper
@@ -19,11 +18,11 @@ import org.buffer.android.boilerplate.ui.widget.empty.EmptyListener
 import org.buffer.android.boilerplate.ui.widget.error.ErrorListener
 import javax.inject.Inject
 
-class BrowseActivity: AppCompatActivity() {
+class BrowseActivity : AppCompatActivity() {
 
     @Inject lateinit var browseAdapter: BrowseAdapter
     @Inject lateinit var mapper: BufferooMapper
-    @Inject lateinit var viewModelFactory: BrowseBufferoosViewModelFactory
+    @Inject lateinit var viewModelFactory: ViewModelFactory
     private lateinit var browseBufferoosViewModel: BrowseBufferoosViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,9 +39,9 @@ class BrowseActivity: AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        browseBufferoosViewModel.getBufferoos().observe(this,
-                Observer<Resource<List<BufferooView>>> {
-                    if (it != null) this.handleDataState(it.status, it.data, it.message) })
+        browseBufferoosViewModel.getBufferoos().observe(this, Observer {
+            if (it != null) this.handleDataState(it.status, it.data, it.message)
+        })
     }
 
     private fun setupBrowseRecycler() {
@@ -69,7 +68,7 @@ class BrowseActivity: AppCompatActivity() {
     private fun setupScreenForSuccess(data: List<BufferooView>?) {
         view_error.visibility = View.GONE
         progress.visibility = View.GONE
-        if (data!= null && data.isNotEmpty()) {
+        if (data != null && data.isNotEmpty()) {
             updateListView(data)
             recycler_browse.visibility = View.VISIBLE
         } else {

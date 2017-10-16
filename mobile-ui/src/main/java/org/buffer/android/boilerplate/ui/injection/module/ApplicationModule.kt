@@ -4,6 +4,7 @@ import android.app.Application
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.persistence.room.Room
 import android.content.Context
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import org.buffer.android.boilerplate.cache.BufferooCacheImpl
@@ -30,72 +31,8 @@ import org.buffer.android.boilerplate.ui.injection.scopes.PerApplication
  * Module used to provide dependencies at an application-level.
  */
 @Module
-open class ApplicationModule {
+abstract class ApplicationModule {
 
-    @Provides
-    @PerApplication
-    fun provideContext(application: Application): Context {
-        return application
-    }
-
-    @Provides
-    @PerApplication
-    internal fun providePreferencesHelper(context: Context): PreferencesHelper {
-        return PreferencesHelper(context)
-    }
-
-    @Provides
-    @PerApplication
-    internal fun provideBufferooRepository(factory: BufferooDataStoreFactory,
-                                           mapper: BufferooMapper): BufferooRepository {
-        return BufferooDataRepository(factory, mapper)
-    }
-
-    @Provides
-    @PerApplication
-    internal fun provideBufferooCache(database: BufferoosDatabase,
-                                      entityMapper: BufferooEntityMapper,
-                                      helper: PreferencesHelper): BufferooCache {
-        return BufferooCacheImpl(database, entityMapper, helper)
-    }
-
-    @Provides
-    @PerApplication
-    internal fun provideBufferooRemote(service: BufferooService,
-                                       factory: org.buffer.android.boilerplate.remote.mapper.BufferooEntityMapper): BufferooRemote {
-        return BufferooRemoteImpl(service, factory)
-    }
-
-    @Provides
-    @PerApplication
-    internal fun provideThreadExecutor(jobExecutor: JobExecutor): ThreadExecutor {
-        return jobExecutor
-    }
-
-    @Provides
-    @PerApplication
-    internal fun providePostExecutionThread(uiThread: UiThread): PostExecutionThread {
-        return uiThread
-    }
-
-    @Provides
-    @PerApplication
-    internal fun provideBufferooService(): BufferooService {
-        return BufferooServiceFactory.makeBuffeoorService(BuildConfig.DEBUG)
-    }
-
-    @Provides
-    @PerApplication
-    internal fun provideViewModelFactory(): ViewModelProvider.Factory {
-        return ViewModelProvider.NewInstanceFactory()
-    }
-
-    @Provides
-    @PerApplication
-    internal fun provideBufferoosDatabase(application: Application): BufferoosDatabase {
-        return Room.databaseBuilder(application.applicationContext,
-                BufferoosDatabase::class.java, "bufferoos.db")
-                .build()
-    }
-
+    @Binds
+    abstract fun bindContext(application: Application): Context
 }
