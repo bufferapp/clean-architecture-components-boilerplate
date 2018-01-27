@@ -7,7 +7,7 @@ allprojects {
 
 ext {
     //Android
-    androidBuildToolsVersion = "26.0.0"
+    androidBuildToolsVersion = "26.0.2"
     androidMinSdkVersion = 15
     androidTargetSdkVersion = 26
     androidCompileSdkVersion = 26
@@ -29,7 +29,7 @@ ext {
     supportLibraryVersion = '26.1.0'
     timberVersion = '4.5.1'
     glideVersion = '4.0.0'
-    daggerVersion = '2.11'
+    daggerVersion = '2.14.1'
     glassfishAnnotationVersion = '10.0-b28'
 
     //Testing
