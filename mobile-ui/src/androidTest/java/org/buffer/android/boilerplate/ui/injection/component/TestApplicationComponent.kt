@@ -7,14 +7,20 @@ import dagger.android.support.AndroidSupportInjectionModule
 import org.buffer.android.boilerplate.domain.executor.PostExecutionThread
 import org.buffer.android.boilerplate.domain.repository.BufferooRepository
 import org.buffer.android.boilerplate.ui.injection.ApplicationComponent
-import org.buffer.android.boilerplate.ui.injection.module.ActivityBindingModule
-import org.buffer.android.boilerplate.ui.injection.module.TestApplicationModule
+import org.buffer.android.boilerplate.ui.injection.module.*
 import org.buffer.android.boilerplate.ui.injection.scopes.PerApplication
 import org.buffer.android.boilerplate.ui.test.TestApplication
+import javax.inject.Singleton
 
-@Component(modules = arrayOf(TestApplicationModule::class, ActivityBindingModule::class,
-        AndroidSupportInjectionModule::class))
-@PerApplication
+@Singleton
+@Component(modules = arrayOf(
+        TestApplicationModule::class,
+        AndroidSupportInjectionModule::class,
+        TestCacheModule::class,
+        TestRemoteModule::class,
+        TestDataModule::class,
+        PresentationModule::class,
+        UiModule::class))
 interface TestApplicationComponent : ApplicationComponent {
 
     fun bufferooRepository(): BufferooRepository

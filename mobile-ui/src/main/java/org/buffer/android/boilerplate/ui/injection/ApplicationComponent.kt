@@ -5,18 +5,27 @@ import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
 import org.buffer.android.boilerplate.ui.BufferooApplication
-import org.buffer.android.boilerplate.ui.injection.module.ActivityBindingModule
-import org.buffer.android.boilerplate.ui.injection.module.ApplicationModule
-import org.buffer.android.boilerplate.ui.injection.scopes.PerApplication
+import org.buffer.android.boilerplate.ui.injection.module.*
+import javax.inject.Singleton
 
-@PerApplication
-@Component(modules = arrayOf(ActivityBindingModule::class, ApplicationModule::class,
-        AndroidSupportInjectionModule::class))
+@Singleton
+@Component(modules = arrayOf(
+        ApplicationModule::class,
+        AndroidSupportInjectionModule::class,
+        CacheModule::class,
+        DataModule::class,
+        DomainModule::class,
+        PresentationModule::class,
+        RemoteModule::class,
+        UiModule::class)
+)
 interface ApplicationComponent {
 
     @Component.Builder
     interface Builder {
-        @BindsInstance fun application(application: Application): Builder
+        @BindsInstance
+        fun application(application: Application): Builder
+
         fun build(): ApplicationComponent
     }
 

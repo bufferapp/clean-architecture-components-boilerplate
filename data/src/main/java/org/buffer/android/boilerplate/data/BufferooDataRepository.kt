@@ -14,7 +14,7 @@ import javax.inject.Inject
  * data sources
  */
 class BufferooDataRepository @Inject constructor(private val factory: BufferooDataStoreFactory,
-                                                 private val bufferooMapper: BufferooMapper):
+                                                 private val bufferooMapper: BufferooMapper) :
         BufferooRepository {
 
     override fun clearBufferoos(): Completable {
