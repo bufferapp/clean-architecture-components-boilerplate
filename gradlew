@@ -169,4 +169,8 @@ if [ "$(uname)" = "Darwin" ] && [ "$HOME" = "$PWD" ]; then
   cd "$(dirname "$0")"
 fi
 
+# Accept licenses in order for CI to build
+yes | $ANDROID_HOME/tools/bin/sdkmanager "platforms;android-26"
+yes | $ANDROID_HOME/tools/bin/sdkmanager "build-tools;2N8.0.3"
+
 exec "$JAVACMD" "$@"
